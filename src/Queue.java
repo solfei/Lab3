@@ -68,6 +68,7 @@ public class Queue<T> implements Q<T> {
             while (temp != null) {
                 enqueue(temp.data);
                 temp = temp.next;
+                this.size++;
             }
         }
     }
@@ -112,8 +113,9 @@ public class Queue<T> implements Q<T> {
             this.front = this.end = N;
         } else {
             this.end.next = N;
+            this.end = N;
         }
-        size++;
+        this.size++;
     }
 
     public void dequeue() throws NoSuchElementException {
@@ -126,6 +128,7 @@ public class Queue<T> implements Q<T> {
         } else {
             this.front = this.front.next;
         }
+        this.size--;
     }
 
     public String reverseQueue() {
@@ -147,15 +150,15 @@ public class Queue<T> implements Q<T> {
      */
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder("");
+        String result = "";
 
         Node temp = this.front;
         while (temp != null) {
-            result.append(temp.data);
+            result += temp.data.toString() + " ";
             temp = temp.next;
         }
 
-        return result.toString() + " \n";
+        return result + "\n";
     }
 
     /**
@@ -228,7 +231,7 @@ public class Queue<T> implements Q<T> {
 
         int size = q3.getSize();
         System.out.println("Is getSize() working?... " + (size == 4));
-        System.out.println("");
-
+        System.out.println(q1); // AL
+        System.out.println("22" + q3);
     }
 }

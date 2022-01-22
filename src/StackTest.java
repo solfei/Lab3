@@ -3,7 +3,7 @@ import org.junit.Test;
 /**
  * StackTest
  */
-public class StackTest {
+class StackTest {
     @Test
     void testStack() {
 
