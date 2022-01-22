@@ -131,9 +131,9 @@ public class Queue<T> implements Q<T> {
     public String reverseQueue() {
         String result = "";
 
-        reverseQueue(this.end);
+        result += reverseQueue(this.end);
 
-        return result;
+        return result + "\n";
     }
 
     /**** ADDITONAL OPERATIONS ****/
@@ -164,8 +164,10 @@ public class Queue<T> implements Q<T> {
      * 
      * @param o the Object to compare to this
      * @return whether o and this are equal
+     * 
      */
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(Object o) {
         if (this == o) {
             return true;
