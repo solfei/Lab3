@@ -55,7 +55,7 @@ public class QueueArray<T> implements Q<T> {
      *                an identical, but distinct, copy of original
      */
     @SuppressWarnings("unchecked")
-    public QueueArray(Queue<T> original) {
+    public QueueArray(QueueArray<T> original) {
         if (original == null) {
             return;
         }
@@ -66,7 +66,7 @@ public class QueueArray<T> implements Q<T> {
         } else {
             this.queue = (T[]) new Object[original.getSize()];
             for (int i = 0; i < original.getSize(); i++) {
-                // this.queue[i] = array[i];
+                this.enqueue(original.queue[i]);
             }
         }
     }
@@ -143,9 +143,11 @@ public class QueueArray<T> implements Q<T> {
             throw new NoSuchElementException("dequeue(): Queue is empty!");
         }
 
-        for (int i = 0; i < this.curr_size; i++) {
+        for (int i = 0; i < this.curr_size - 1; i++) {
             this.queue[i] = this.queue[i + 1];
         }
+
+        this.curr_size--;
 
     }
 

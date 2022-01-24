@@ -31,7 +31,8 @@ public class Stack<T extends Comparable<T>> {
      *                assigned default values
      */
     public Stack() {
-
+        this.top = null;
+        this.size = 0;
     }
 
     /**
@@ -42,7 +43,16 @@ public class Stack<T extends Comparable<T>> {
      *           copy into the Stack
      */
     public Stack(T[] array) {
-
+        if (array == null) {
+            return;
+        }
+        if (array.length == 0) {
+            this.top = null;
+            this.size = 0;
+        }
+        for (int i = array.length - 1; i >= 0; i--) {
+            this.push(array[i]);
+        }
     }
 
     /**
@@ -55,6 +65,16 @@ public class Stack<T extends Comparable<T>> {
      *                IN O(N) TIME
      */
     public Stack(Stack<T> original) {
+        // if (original == null) {
+        // return;
+        // }
+
+        // if (original.getSize() == 0) {
+        // this.top=null;
+        // this.size=0;
+        // }else{
+
+        // }
 
     }
 
@@ -70,7 +90,10 @@ public class Stack<T extends Comparable<T>> {
      *                                the Stack is empty
      */
     public T peek() throws NoSuchElementException {
-        return null;
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("peek(): Nothing in the Stack to return");
+        }
+        return this.top.data;
     }
 
     /**
@@ -79,7 +102,7 @@ public class Stack<T extends Comparable<T>> {
      * @return the length from 0 to n
      */
     public int getSize() {
-        return -1;
+        return this.size;
     }
 
     /**
@@ -88,7 +111,7 @@ public class Stack<T extends Comparable<T>> {
      * @return whether the Stack is empty
      */
     public boolean isEmpty() {
-        return false;
+        return this.size == 0;
     }
 
     /**** MUTATORS ****/
@@ -99,7 +122,10 @@ public class Stack<T extends Comparable<T>> {
      * @param data the new data to insert
      */
     public void push(T data) {
-
+        Node N = new Node(data);
+        N.next = this.top;
+        this.top = N;
+        this.size++;
     }
 
     /**
@@ -110,7 +136,11 @@ public class Stack<T extends Comparable<T>> {
      *                                the Stack is empty
      */
     public void pop() throws NoSuchElementException {
-
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("pop(): Nothing to pop!");
+        }
+        this.top = this.top.next;
+        this.size--;
     }
 
     /**** ADDITONAL OPERATIONS ****/
@@ -123,7 +153,14 @@ public class Stack<T extends Comparable<T>> {
      * @return a String of Stack values
      */
     public String toString() {
-        return null;
+        Node temp = this.top;
+        String result = "";
+        while (temp != null) {
+            result += temp.data + " ";
+            temp = temp.next;
+        }
+
+        return result + "\n";
     }
 
     /**
@@ -134,8 +171,31 @@ public class Stack<T extends Comparable<T>> {
      * @return whether o and this are equal Stacks
      */
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(Object o) {
-        return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Stack)) {
+            return false;
+        }
+
+        Stack<T> obj = (Stack<T>) o;
+        if (this.size != obj.size) {
+            return false;
+        }
+
+        Node thisTemp = this.top;
+        Node objTemp = obj.top;
+        while (thisTemp != null) {
+            if (!(thisTemp.data.equals(objTemp.data))) {
+                return false;
+            }
+            thisTemp = thisTemp.next;
+            objTemp = objTemp.next;
+        }
+        return true;
     }
 
     /**
@@ -169,6 +229,14 @@ public class Stack<T extends Comparable<T>> {
      *         the element is considered not found
      */
     public boolean linearSearch(T element) {
+        Node temp = this.top;
+        while (temp != null) {
+            if (temp.data == element) {
+                return true;
+            }
+            temp = temp.next;
+        }
+
         return false;
     }
 

@@ -22,6 +22,7 @@ public class Queue<T> implements Q<T> {
     private Node front;
     private Node end;
     private int size;
+    public int[] queue;
 
     /**
      * Default constructor for the Queue class
@@ -66,7 +67,7 @@ public class Queue<T> implements Q<T> {
         } else {
             Node temp = aQueue.front;
             while (temp != null) {
-                enqueue(temp.data);
+                this.enqueue(temp.data);
                 temp = temp.next;
                 this.size++;
             }
@@ -134,7 +135,7 @@ public class Queue<T> implements Q<T> {
     public String reverseQueue() {
         String result = "";
 
-        result += reverseQueue(this.end);
+        result += this.reverseQueue(this.end);
 
         return result + "\n";
     }

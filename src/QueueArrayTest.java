@@ -45,19 +45,19 @@ class QueueArrayTest {
         assertEquals(0, new QueueArray<String>(array).getSize());
     }
 
-    // @Test
-    // void testQueueQueueOfT() {
-    // setUp();
-    // QueueArray<String> nullQ = null;
-    // QueueArray<String> copy = new QueueArray<>(nullQ);
-    // assertEquals(0, copy.getSize());
-    // copy = new QueueArray<>(q1);
-    // assertEquals("A", copy.getFront());
-    // assertEquals(q1.toString(), copy.toString());
-    // // checking for deep copy
-    // copy.enqueue("D");
-    // assertNotEquals(copy.getSize(), q1.getSize());
-    // }
+    @Test
+    void testQueueQueueOfT() {
+        setUp();
+        QueueArray<String> nullQ = null;
+        QueueArray<String> copy = new QueueArray<>(nullQ);
+        assertEquals(0, copy.getSize());
+        copy = new QueueArray<>(q1);
+        assertEquals("A", copy.getFront());
+        assertEquals(q1.toString(), copy.toString());
+        // checking for deep copy
+        copy.enqueue("D");
+        assertNotEquals(copy.getSize(), q1.getSize());
+    }
 
     @Test
     void testGetFront() {
