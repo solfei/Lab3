@@ -83,7 +83,10 @@ public class QueueArray<T> implements Q<T> {
      * @throws NoSuchElementException when the
      *                                precondition is violated
      */
-    public T getFront() {
+    public T getFront() throws NoSuchElementException {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("getFront(): Queue is empty");
+        }
         return this.queue[0];
     }
 
@@ -120,12 +123,10 @@ public class QueueArray<T> implements Q<T> {
         if (this.curr_size == this.queue.length) {
             this.resize();
         }
-        if (this.isEmpty()) {
-            this.queue[curr_size] = data;
-        } else {
-            this.queue[curr_size + 1] = data;
-        }
         curr_size++;
+
+        this.queue[curr_size - 1] = data;
+
     }
 
     /**
@@ -232,5 +233,14 @@ public class QueueArray<T> implements Q<T> {
         }
 
         this.queue = newArray;
+    }
+
+    public static void main(String[] args) {
+        QueueArray<String> q1 = new QueueArray<>();
+        for (int i = 'A'; i < 'M'; i++) {
+            q1.enqueue("" + (char) i);
+        }
+        QueueArray<Integer> q2 = new QueueArray<>();
+        QueueArray<Double> q3 = new QueueArray<>(new Double[] { 1.1, 2.2, 3.3, 4.4 });
     }
 }
