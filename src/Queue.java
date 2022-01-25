@@ -133,11 +133,10 @@ public class Queue<T> implements Q<T> {
     }
 
     public String reverseQueue() {
-        String result = "";
+        if (this.isEmpty())
+            return "\n";
 
-        result += this.reverseQueue(this.end);
-
-        return result + "\n";
+        return this.reverseQueue(this.front) + " \n";
     }
 
     /**** ADDITONAL OPERATIONS ****/
@@ -203,13 +202,11 @@ public class Queue<T> implements Q<T> {
      * 
      * @param n the current node
      */
-
     private String reverseQueue(Node n) {
-        Node temp = this.front;
+        Node temp = n;
 
-        if (temp.next != n) {
-            temp = temp.next;
-            reverseQueue();
+        if (temp.next != null) {
+            return reverseQueue(temp.next) + " " + temp.data.toString();
         }
 
         return temp.data.toString();
