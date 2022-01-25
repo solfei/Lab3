@@ -2,19 +2,21 @@
 
 ## Sunday - 1/23/2022
     
-* Get tests to run for QueueArray
+* ~~Get tests to run for QueueArray~~
 * Stack.java  
     * binarySearch
     * isSorted
-    * copy constructor
-    * reverseStack
+    * ~~copy constructor~~
+    * ~~reverseStack~~
 * StackTest.java
     * binarySearch
     * isSorted
-    * copy constructor
-    * reverseStack
+    * ~~copy constructor~~
+    * linearSearch
+    * ~~reverseStack~~
 * QueueStack.java
-    * reverseQueue
+    * ~~reverseQueue~~
 * Queue.java
-    * reverseQueue
+    * ~~reverseQueue~~
+
 * QueueStack.java

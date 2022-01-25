@@ -1,7 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import java.util.Comparator;
 import java.util.NoSuchElementException;
 
 /**
@@ -132,16 +131,41 @@ class StackTest {
 
     }
 
-    // @Test
-    // void testReverseQueue() {
-    // setUp();
-    // Stack<String> q = new Stack<>();
-    // q.push("A");
-    // q.push("B");
-    // q.push("C");
-    // assertEquals("C B A \n", q.reverseQueue());
-    // assertEquals("\n", q2.reverseQueue());
-    // assertEquals("4.4 3.3 2.2 1.1 \n", q3.reverseQueue());
-    // }
+    @Test
+    void testReverseStack() {
+        setUp();
+        Stack<String> q = new Stack<>();
+        q.push("C");
+        q.push("B");
+        q.push("A");
+        assertEquals("C B A \n", q.reverseStack());
+        assertEquals("\n", q2.reverseStack());
+        assertEquals("4.4 3.3 2.2 1.1 \n", q3.reverseStack());
+    }
 
+    @Test
+    void testLinearSearch() {
+        setUp();
+        assertFalse(q3.linearSearch(1028.0));
+        assertTrue(q1.linearSearch("A"));
+        assertTrue(q1.linearSearch("L"));
+    }
+
+    @Test
+    void testBinarySearch() {
+
+    }
+
+    @Test
+    void testIsSorted() {
+        setUp();
+        assertThrows(NoSuchElementException.class, () -> {
+            q2.isSorted();
+        });
+        assertTrue(q1.isSorted());
+        for (int i = 'A'; i < 'M'; i++) {
+            q1.push("" + (char) i);
+        }
+        assertFalse(q1.isSorted());
+    }
 }

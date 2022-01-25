@@ -65,17 +65,25 @@ public class Stack<T extends Comparable<T>> {
      *                IN O(N) TIME
      */
     public Stack(Stack<T> original) {
-        // if (original == null) {
-        // return;
-        // }
+        if (original == null) {
+            return;
+        }
 
-        // if (original.getSize() == 0) {
-        // this.top=null;
-        // this.size=0;
-        // }else{
+        if (original.getSize() == 0) {
+            this.top = null;
+            this.size = 0;
+        } else {
+            Node temp = original.top;
+            this.top = original.top;
+            Node temp2 = this.top;
 
-        // }
-
+            while (temp != null) {
+                temp2.next = temp.next;
+                temp = temp.next;
+                temp2 = temp2.next;
+                this.size++;
+            }
+        }
     }
 
     /**** ACCESSORS ****/
@@ -204,7 +212,7 @@ public class Stack<T extends Comparable<T>> {
      * by calling the private helper method
      */
     public String reverseStack() {
-        return null;
+        return isEmpty() ? "\n" : this.reverseStack(this.top) + " \n";
     }
 
     /**
@@ -212,10 +220,15 @@ public class Stack<T extends Comparable<T>> {
      * is sorted from smallest to largest
      * by calling its recursive helper
      * 
+     * @throws NoSuchElementException
      * @return whether the Stack is sorted
      */
-    public boolean isSorted() {
-        return false;
+    public boolean isSorted() throws NoSuchElementException {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("isSorted(): Stack is empty");
+        }
+
+        return this.isSorted(this.top);
     }
 
     /**
@@ -231,7 +244,7 @@ public class Stack<T extends Comparable<T>> {
     public boolean linearSearch(T element) {
         Node temp = this.top;
         while (temp != null) {
-            if (temp.data == element) {
+            if (temp.data.equals(element)) {
                 return true;
             }
             temp = temp.next;
@@ -253,6 +266,8 @@ public class Stack<T extends Comparable<T>> {
      *                               precondition is violated.
      */
     public boolean binarySearch(T value) throws IllegalStateException {
+        // int low = 0;
+        // int high =
         return false;
     }
 
@@ -265,7 +280,10 @@ public class Stack<T extends Comparable<T>> {
      * @param n the current node
      */
     private String reverseStack(Node n) {
-        return null;
+        if (n.next != null) {
+            return reverseStack(n.next) + " " + n.data.toString();
+        }
+        return n.data.toString();
     }
 
     /**
@@ -278,7 +296,14 @@ public class Stack<T extends Comparable<T>> {
      *         in ascending order
      */
     private boolean isSorted(Node node) {
+        if (node.next == null) {
+            return true;
+        }
+        if (node.data.compareTo(node.next.data) < 0) {
+            return isSorted(node.next);
+        }
         return false;
+
     }
 
     /**

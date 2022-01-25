@@ -123,9 +123,9 @@ public class QueueArray<T> implements Q<T> {
         if (this.curr_size == this.queue.length) {
             this.resize();
         }
-        curr_size++;
+        this.curr_size++;
 
-        this.queue[curr_size - 1] = data;
+        this.queue[this.curr_size - 1] = data;
 
     }
 
@@ -206,7 +206,10 @@ public class QueueArray<T> implements Q<T> {
      * @return a Queue in reverse order
      */
     public String reverseQueue() {
-        return "";
+        if (this.isEmpty())
+            return "\n";
+
+        return this.reverseQueue(0) + " \n";
     }
 
     /** PRIVATE HELPER METHODS */
@@ -219,7 +222,11 @@ public class QueueArray<T> implements Q<T> {
      *         order
      */
     private String reverseQueue(int index) {
-        return null;
+        if (index + 1 != curr_size) {
+            return reverseQueue(index + 1) + " " + this.queue[index].toString();
+        }
+
+        return this.queue[index].toString();
     }
 
     /**
@@ -235,14 +242,5 @@ public class QueueArray<T> implements Q<T> {
         }
 
         this.queue = newArray;
-    }
-
-    public static void main(String[] args) {
-        QueueArray<String> q1 = new QueueArray<>();
-        for (int i = 'A'; i < 'M'; i++) {
-            q1.enqueue("" + (char) i);
-        }
-        QueueArray<Integer> q2 = new QueueArray<>();
-        QueueArray<Double> q3 = new QueueArray<>(new Double[] { 1.1, 2.2, 3.3, 4.4 });
     }
 }

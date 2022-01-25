@@ -203,33 +203,10 @@ public class Queue<T> implements Q<T> {
      * @param n the current node
      */
     private String reverseQueue(Node n) {
-        Node temp = n;
-
-        if (temp.next != null) {
-            return reverseQueue(temp.next) + " " + temp.data.toString();
+        if (n.next != null) {
+            return reverseQueue(n.next) + " " + n.data.toString();
         }
 
-        return temp.data.toString();
-    }
-
-    public static void main(String[] args) {
-        Queue<String> q1 = new Queue<>();
-        for (int i = 'A'; i < 'M'; i++) {
-            q1.enqueue("" + (char) i);
-        }
-        Queue<Integer> q2 = new Queue<>();
-        Queue<Double> q3 = new Queue<>(new Double[] { 1.1, 2.2, 3.3, 4.4 });
-
-        System.out.println(q2.isEmpty());
-        try {
-            q2.getFront();
-        } catch (Exception e) {
-            System.out.println("YAAAY");
-        }
-
-        int size = q3.getSize();
-        System.out.println("Is getSize() working?... " + (size == 4));
-        System.out.println(q1); // AL
-        System.out.println("22" + q3);
+        return n.data.toString();
     }
 }
