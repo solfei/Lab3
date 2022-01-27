@@ -1,8 +1,8 @@
 
 /**
  * Stack.java
- * @author 
- * @author
+ * @author Sam Yadav
+ * @author Sol Valdimarsdottir
  * CIS 22C, Lab 3
  */
 
@@ -73,16 +73,16 @@ public class Stack<T extends Comparable<T>> {
             this.top = null;
             this.size = 0;
         } else {
+            this.top = new Node(original.top.data);
             Node temp = original.top;
-            this.top = original.top;
             Node temp2 = this.top;
 
-            while (temp != null) {
-                temp2.next = temp.next;
+            while (temp.next != null) {
                 temp = temp.next;
+                temp2.next = new Node(temp.data);
                 temp2 = temp2.next;
-                this.size++;
             }
+            this.size = original.getSize();
         }
     }
 
@@ -266,8 +266,14 @@ public class Stack<T extends Comparable<T>> {
      *                               precondition is violated.
      */
     public boolean binarySearch(T value) throws IllegalStateException {
-        // int low = 0;
-        // int high =
+        if (!isSorted()) {
+            throw new IllegalStateException("binarySearch(): Cannot perform on unsorted stack.");
+        }
+
+        if (this.binarySearch(0, this.size - 1, value) != -1) {
+            return true;
+        }
+
         return false;
     }
 
@@ -318,6 +324,25 @@ public class Stack<T extends Comparable<T>> {
      *         from 1 to length or -1 to indicate not found
      */
     private int binarySearch(int low, int high, T value) {
+        if (high < low) {
+            return -1;
+        }
+
+        int mid = low + (high - low) / 2;
+
+        Node temp = this.top;
+        for (int i = 0; i < mid; i++) {
+            temp = temp.next;
+        }
+
+        if (temp.data.equals(value)) {
+            return mid;
+        } else if (temp.data.compareTo(value) > 0) {
+            return binarySearch(low, mid - 1, value);
+        } else if (temp.data.compareTo(value) < 0) {
+            return binarySearch(mid + 1, high, value);
+        }
+
         return -1;
     }
 

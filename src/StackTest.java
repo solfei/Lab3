@@ -1,3 +1,9 @@
+
+/**
+ *  * @author Sam Yadav
+ * @author Sol Valdimarsdottir
+ */
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -153,7 +159,16 @@ class StackTest {
 
     @Test
     void testBinarySearch() {
-
+        setUp();
+        assertFalse(q3.binarySearch(1028.0));
+        assertTrue(q1.binarySearch("A"));
+        assertTrue(q1.binarySearch("L"));
+        for (int i = 1; i < 15; i++) {
+            q2.push(i);
+        }
+        assertThrows(IllegalStateException.class, () -> {
+            q2.binarySearch(100);
+        });
     }
 
     @Test
