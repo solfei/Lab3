@@ -32,16 +32,14 @@ public class QueueStack<T extends Comparable<T>> implements Q<T> {
         if (array == null) {
             return;
         }
-        if (array.length == 0) {
-            this.stack1 = new Stack<>();
-            this.stack2 = new Stack<>();
+
+        this.stack1 = new Stack<>();
+        this.stack2 = new Stack<>();
+
+        for (int i = 0; i < array.length; i++) {
+            this.enqueue(array[i]);
         }
-        for (int index = 0; index < array.length; index++) {
-            this.stack2.push(array[index]);
-        }
-        for (int index = array.length - 1; index >= 0; index--) {
-            this.stack1.push(array[index]);
-        }
+
     }
 
     /**
@@ -68,8 +66,14 @@ public class QueueStack<T extends Comparable<T>> implements Q<T> {
      *                                precondition is violated
      */
     public T getFront() throws NoSuchElementException {
-        if (this.stack1.isEmpty()) {
+        if (this.stack1.isEmpty() && this.stack2.isEmpty()) {
             throw new NoSuchElementException("getFront(): Queue is empty.");
+        }
+        if (this.stack1.isEmpty()) {
+            while (!stack2.isEmpty()) {
+                stack1.push(stack2.peek());
+                stack2.pop();
+            }
         }
 
         return this.stack1.peek();
@@ -81,7 +85,11 @@ public class QueueStack<T extends Comparable<T>> implements Q<T> {
      * @return the size from 0 to n
      */
     public int getSize() {
-        return this.stack1.getSize();
+        if (!(this.stack1 instanceof Stack) && !(this.stack2 instanceof Stack)) {
+            return 0;
+        }
+
+        return this.stack1.getSize() + this.stack2.getSize();
     }
 
     /**
@@ -91,7 +99,7 @@ public class QueueStack<T extends Comparable<T>> implements Q<T> {
      *         no elements
      */
     public boolean isEmpty() {
-        return (this.stack1.isEmpty());
+        return this.stack1.isEmpty() && this.stack2.isEmpty();
     }
 
     /**** MUTATORS ****/
@@ -105,7 +113,7 @@ public class QueueStack<T extends Comparable<T>> implements Q<T> {
      * @postcondition a new node at the end of the Queue
      */
     public void enqueue(T data) {
-        stack2.push(data);
+        this.stack2.push(data);
     }
 
     /**
@@ -167,7 +175,7 @@ public class QueueStack<T extends Comparable<T>> implements Q<T> {
             }
         }
 
-        return result;
+        return result + "\n";
     }
 
     /**** ADDITONAL OPERATIONS ****/
@@ -211,7 +219,7 @@ public class QueueStack<T extends Comparable<T>> implements Q<T> {
             }
         }
 
-        return result;
+        return result + "\n";
     }
 
     /**
@@ -232,6 +240,8 @@ public class QueueStack<T extends Comparable<T>> implements Q<T> {
         }
 
         QueueStack<T> obj = (QueueStack<T>) o;
+        obj.getFront();
+        this.getFront();
 
         return this.stack1.equals(obj.stack1) && this.stack2.equals(obj.stack2);
     }

@@ -21,3 +21,8 @@
   - ~~reverseQueue~~
 
 - QueueStack.java
+
+  - copy constructor
+
+- QueueStackTest.java
+  - copy constructor
