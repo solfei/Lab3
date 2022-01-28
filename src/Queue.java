@@ -1,8 +1,8 @@
 
 /**
  * Queue class - singly-linked list version
- * @author
- * @author
+ * @author Sam Yadav
+ * @author Sol Valdimarsdottir
  * CIS 22C, Lab 3
  */
 

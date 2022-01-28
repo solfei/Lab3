@@ -1,6 +1,6 @@
 
 /**
- *  * @author Sam Yadav
+ ** @author Sam Yadav
  * @author Sol Valdimarsdottir
  */
 

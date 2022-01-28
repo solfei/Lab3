@@ -49,8 +49,16 @@ public class QueueStack<T extends Comparable<T>> implements Q<T> {
      * @postcondition a new Queue object which is an identical,
      *                but distinct, copy of original
      */
-    public QueueStack(Queue<T> original) {
+    public QueueStack(QueueStack<T> original) {
+        if (original == null) {
+            return;
+        } else if (original.getSize() == 0) {
+            this.stack1 = new Stack<>();
+            this.stack2 = new Stack<>();
+        }
 
+        this.stack1 = new Stack<>(original.stack1);
+        this.stack2 = new Stack<>(original.stack2);
     }
 
     /**** ACCESSORS ****/
